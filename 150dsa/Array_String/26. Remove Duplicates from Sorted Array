@@ -1,0 +1,78 @@
+26. Remove Duplicates from Sorted Array:
+
+Use two pointer 
+We will remove all duplicate numbers and shift each unique number to the left of the array.
+
+Input: nums = [0,0,1,1,1,2,2,3,3,4]
+Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
+
+Why do you need to compare with i - 1?
+Bascially, We compare i number and j number with nums[j] == nums[i - 1] condition.
+
+At index 1, we want to put 1 in the end. The above case is fine if you compare with nums[j] == nums[i], because both numbers at index 1 and 2 are the same. we can use 0 at index 1 for comparison.
+
+But what if we have different number at index 1 and use nums[j] == nums[i]? In this case, 1 may disappear.
+
+
+nums = [0,1,2,2,3,3,4]
+          i
+          j
+↓
+
+Check `nums[j] == nums[i]`
+`i` number and `j` number are the same. Move `j` to next.
+
+nums = [0,1,2,2,3,3,4]
+          i　j
+
+Check `nums[j] == nums[i]`
+Both number are different. Update `i` number with `j` number.
+nums = [0,2,2,2,3,3,4] → That will be wrong answer.
+
+
+let see i-1
+
+nums = [0,1,2,2,3,3,4]
+          i
+          j
+↓
+
+Check `nums[j] == nums[i - 1]`
+update `i` number with `j` number → [0,1,2,2,3,3,4](nothing changed)
+Move `i` and `j` to next.
+
+nums = [0,1,2,2,3,3,4]
+            i          　
+            j
+
+Check `nums[j] == nums[i - 1]`
+Both number are different. Update `i` number with `j` number.
+
+nums = [0,1,2,2,3,3,4]
+              i          　
+              j
+
+Looks good so far.
+
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+
+      if(nums.size() == 0 ) return 0;
+
+      int i =1;
+
+      for(int j=1; j<nums.size(); j++){
+        if(nums[j]!= nums[i-1]){
+            nums[i]= nums[j];
+            i++;
+        }
+      }
+      return i;
+        
+       
+        
+        
+    }
+};

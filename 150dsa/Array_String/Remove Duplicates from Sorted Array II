@@ -1,0 +1,46 @@
+Initialize pointer
+k = 0
+ Ye batayega ki next valid element kaha place hoga
+Traverse array
+Loop i = 0 → n-1
+
+Condition check
+
+Agar:
+
+k < 2 
+OR 
+nums[i] != nums[k - 2
+
+Pehle 2 elements always allowed
+Uske baad check karo ki element 3rd time repeat toh nahi ho raha
+
+Valid element ko place karo
+
+nums[k] = nums[i]
+k++
+End of loop
+k hi final length hai (valid elements count
+
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+
+        int k =2;
+
+        if(nums.size() <= 2) return nums.size();
+
+        for(int i=2; i<nums.size(); i++){
+            if(nums[i] != nums[k-2]){
+                nums[k] = nums[i];
+                k++;
+            }
+        }
+        return k;
+        
+    }
+};
+
+
+
